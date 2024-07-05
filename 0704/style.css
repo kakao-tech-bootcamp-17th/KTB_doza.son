@@ -36,7 +36,7 @@ input[type="text"] {
 button {
     padding: 10px 20px;
     border: none;
-    background: turquoise;
+    background: #28a745;
     color: white;
     cursor: pointer;
     border-radius: 4px;
@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {
-    background: rgb(51, 175, 163);
+    background: #218838;
 }
 
 ul {

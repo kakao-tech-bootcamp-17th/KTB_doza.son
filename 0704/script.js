@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoInput = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
 
-    //todolist 저장
+    //저장되어 있는 todolist 불러오기
     const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
     savedTodos.forEach(todo => addTodoItem(todo.text, todo.completed));
-
-    //이벤트 실행
+    
+    //서밋 버튼 누를시 이벤트 발생
     todoForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -20,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveTodos();
         todoInput.value = '';
     });
-
-    //todoItem 입력
+    //addtodo 함수
     function addTodoItem(text, completed) {
         const newTodoItem = document.createElement('li');
         if (completed) {
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.type = 'checkbox';
         checkbox.classList.add('checkbox');
         checkbox.checked = completed;
-        //변경사항 저장
         checkbox.addEventListener('change', () => {
             toggleTodoItemCompletion(newTodoItem);
             saveTodos();
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
-        //todoItem 삭제 및 변경사항 저장
         deleteButton.classList.add('delete');
         deleteButton.addEventListener('click', () => {
             deleteTodoItem(newTodoItem);
@@ -60,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newTodoItem.appendChild(deleteButton);
         todoList.appendChild(newTodoItem);
     }
-
+    //deletetodo 함수
     function deleteTodoItem(todoItem) {
         todoList.removeChild(todoItem);
     }
@@ -68,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleTodoItemCompletion(todoItem) {
         todoItem.classList.toggle('completed');
     }
-    //저장사항 저장 함수
+    //todolist 저장함수
     function saveTodos() {
         const todos = [];
         todoList.querySelectorAll('li').forEach(todoItem => {

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //저장되어 있는 todolist 불러오기
     const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
-    savedTodos.forEach(todo => addTodoItem(todo.text, todo.completed));
+    savedTodos.forEach(todo => addTodoItem(todo.text, todo.isCompleted));
     
     //서밋 버튼 누를시 이벤트 발생
     todoForm.addEventListener('submit', (e) => {
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         todoInput.value = '';
     });
     //addtodo 함수
-    function addTodoItem(text, completed) {
+    function addTodoItem(text, isCompleted) {
         const newTodoItem = document.createElement('li');
-        if (completed) {
+        if (isCompleted) {
             newTodoItem.classList.add('completed');
         }
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.classList.add('checkbox');
-        checkbox.checked = completed;
+        checkbox.checked = isCompleted;
         checkbox.addEventListener('change', () => {
             toggleTodoItemCompletion(newTodoItem);
             saveTodos();
@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const todos = [];
         todoList.querySelectorAll('li').forEach(todoItem => {
             const text = todoItem.querySelector('span').textContent;
-            const completed = todoItem.classList.contains('completed');
-            todos.push({ text, completed });
+            const isCompleted = todoItem.classList.contains('completed');
+            todos.push({ text, isCompleted });
         });
         localStorage.setItem('todos', JSON.stringify(todos));
     }

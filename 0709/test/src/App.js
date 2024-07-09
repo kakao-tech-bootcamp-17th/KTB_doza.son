@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ThemeProvider, ThemeContext } from './ThemeContext'; // 파일 이름과 일치시킵니다.
+import { ThemeProvider, ThemeContext } from './ThemeContext'; 
 import './App.css';
 
 function App() {

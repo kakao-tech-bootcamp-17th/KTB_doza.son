@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API 테스트</title>
+</head>
+<body>
+  <h1>API 테스트</h1>
+  <pre id="response"></pre>
+
+  <script>
+    const url = 'https://dapi.kakao.com/v2/search/web';
+    const queryParams = '?query=example';
+    const apiKey = 'bb038e957fe3c5f6cbf87ae0fcaab680';
+
+    fetch(url + queryParams, {
+      method: 'GET',
+      headers: {
+        'Authorization': `KakaoAK ${apiKey}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+</body>
+</html>

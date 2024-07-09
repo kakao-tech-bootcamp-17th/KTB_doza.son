@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeProvider, ThemeContext } from './ThemeContext'; // 파일 이름과 일치시킵니다.
 import './App.css';
 
 function App() {
   const [name, setName] = useState('');
   const [date, setDate] = useState(new Date());
-  const [theme, setTheme] = useState('light');
+  const { theme, toggleTheme } = useContext(ThemeContext); // ThemeContext 사용
 
-  const handleNameChange = (e) => setName(e.target.value); //이름 설정
-  const toggleTheme = () => setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light')); //테마설정 (boolean)
+  const handleNameChange = (e) => setName(e.target.value); // 이름 설정
   const handleSubmit = () => {
     alert(`Name: ${name}, Date: ${date.toLocaleString('ko-KR')}`);
   };
 
-  //usdEffect를 이용하여 실시간 날짜 표현
+  // useEffect를 이용하여 실시간 날짜 표현
   useEffect(() => {
     const intervalId = setInterval(() => {
       setDate(new Date());
@@ -42,4 +42,10 @@ function App() {
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}
